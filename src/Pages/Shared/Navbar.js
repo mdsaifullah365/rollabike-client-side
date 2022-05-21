@@ -1,7 +1,17 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Navbar = () => {
+  // useAuthState
+  const [user] = useAuthState(auth);
+
+  // Event Handler (Log Out)
+  const logOut = () => {
+    signOut(auth);
+  };
   const navLinks = (
     <>
       <li>
@@ -16,12 +26,22 @@ const Navbar = () => {
       <li>
         <Link to='/dashboard'>Dashboard</Link>
       </li>
-      <li>
-        <Link to='/login'>Login</Link>
-      </li>
-      <li>
-        <Link to='/signup'>Sign Up</Link>
-      </li>
+      {user ? (
+        <>
+          <li>
+            <button onClick={logOut}>Sign Out</button>
+          </li>
+        </>
+      ) : (
+        <>
+          <li>
+            <Link to='/login'>Login</Link>
+          </li>
+          <li>
+            <Link to='/signup'>Sign Up</Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -54,6 +74,9 @@ const Navbar = () => {
           RollaBike
         </Link>
       </div>
+
+      {user && <p className='text-primary'>{user?.displayName}</p>}
+
       <div className='hidden lg:flex'>
         <ul className='menu menu-horizontal p-0'>{navLinks}</ul>
       </div>

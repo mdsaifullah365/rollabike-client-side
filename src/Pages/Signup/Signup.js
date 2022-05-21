@@ -10,6 +10,7 @@ import {
 } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
+import Loading from '../Shared/Loading';
 
 const Signup = () => {
   // Hooks
@@ -64,7 +65,7 @@ const Signup = () => {
 
   // Loading
   if (loading || googleLoading || updating) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   // Firebase Error

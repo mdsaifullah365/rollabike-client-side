@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
+import Loading from '../Shared/Loading';
 import ProductCard from './ProductCard';
 
 const Products = () => {
@@ -8,7 +9,7 @@ const Products = () => {
     axios.get('http://localhost:5000/product')
   );
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
   return (
     <section className='container'>

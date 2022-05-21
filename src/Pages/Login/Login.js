@@ -8,6 +8,7 @@ import {
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
 
 const Login = () => {
   // Hooks
@@ -45,7 +46,7 @@ const Login = () => {
 
   // Loading
   if (emailLoading || googleLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   // Navigate

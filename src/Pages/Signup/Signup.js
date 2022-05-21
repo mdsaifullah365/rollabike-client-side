@@ -1,19 +1,96 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile,
+} from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
+  // Hooks
+  const navigate = useNavigate();
+
+  // YUP Validation
+  const signupSchema = yup.object({
+    fullName: yup.string().required('Enter your Full Name'),
+    email: yup
+      .string()
+      .email('Enter a valid Email')
+      .required('Enter your Email'),
+    password: yup
+      .string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Enter a Password'),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), null], 'Passwords should match')
+      .required('Enter confirm Password'),
+  });
+
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(signupSchema) });
+
+  // React Firebase hooks
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth, {
+      sendEmailVerification: true,
+    });
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  // Event Handler (On Submit)
+  const onSubmit = async (data) => {
+    const { fullName, email, password } = data;
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({ displayName: fullName });
+  };
+  // Navigate
+  useEffect(() => {
+    if (user || googleUser) {
+      toast.success('Email Verification Link Sent');
+      navigate('/');
+    }
+  }, [user, googleUser, navigate]);
+
+  // Loading
+  if (loading || googleLoading || updating) {
+    return <p>Loading...</p>;
+  }
+
+  // Firebase Error
+  let signUpError;
+  if (error || googleError || updateError) {
+    signUpError = (
+      <p className='text-center text-error mb-3'>
+        {error?.message || googleError?.message || updateError?.message}
+      </p>
+    );
+  }
+
   return (
     <div className='min-h-[calc(100vh-64px)] flex justify-center items-center'>
       <div className='flex flex-col w-full max-w-md shadow-lg p-8'>
         <h2 className='text-center text-4xl uppercase mb-10'>Sign Up</h2>
-
-        <button className='btn btn-outline uppercase mb-2'>
-          Continue with Google
+        {signUpError}
+        <button
+          onClick={() => signInWithGoogle()}
+          className='btn btn-outline uppercase mb-2'>
+          Signup with Google
         </button>
 
         <div className='divider my-5'>OR</div>
 
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='form-control w-full'>
             <label className='label'>
               <span className='label-text text-base'>Full Name</span>
@@ -22,7 +99,11 @@ const Signup = () => {
               type='text'
               placeholder='Full Name'
               className='input input-bordered w-full'
+              {...register('fullName')}
             />
+            <p className='mt-2 text-sm text-error'>
+              {errors.fullName?.message}
+            </p>
           </div>
 
           <div className='form-control w-full'>
@@ -33,7 +114,9 @@ const Signup = () => {
               type='text'
               placeholder='Email'
               className='input input-bordered w-full'
+              {...register('email')}
             />
+            <p className='mt-2 text-sm text-error'>{errors.email?.message}</p>
           </div>
 
           <div className='form-control w-full'>
@@ -44,7 +127,11 @@ const Signup = () => {
               type='password'
               placeholder='Password'
               className='input input-bordered w-full'
+              {...register('password')}
             />
+            <p className='mt-2 text-sm text-error'>
+              {errors.password?.message}
+            </p>
           </div>
 
           <div className='form-control w-full'>
@@ -55,7 +142,11 @@ const Signup = () => {
               type='password'
               placeholder='Confirm Password'
               className='input input-bordered w-full'
+              {...register('confirmPassword')}
             />
+            <p className='mt-2 text-sm text-error'>
+              {errors.confirmPassword?.message}
+            </p>
           </div>
 
           <input

@@ -1,5 +1,11 @@
+import Navbar from './Pages/Shared/Navbar';
+
 function App() {
-  return <div>Hello</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 }
 
 export default App;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -12,6 +12,8 @@ import auth from '../../firebase.init';
 const Login = () => {
   // Hooks
   const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || '/';
 
   // YUP Validation
   const loginSchema = yup.object({
@@ -48,7 +50,7 @@ const Login = () => {
 
   // Navigate
   if (emailUser || googleUser) {
-    navigate('/');
+    navigate(from, { replace: true });
   }
 
   // Firebase Error

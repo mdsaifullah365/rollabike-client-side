@@ -23,11 +23,12 @@ const Navbar = () => {
       <li>
         <Link to='/myPortfolio'>My Portfolio</Link>
       </li>
-      <li>
-        <Link to='/dashboard'>Dashboard</Link>
-      </li>
+
       {user ? (
         <>
+          <li>
+            <Link to='/dashboard'>Dashboard</Link>
+          </li>
           <li>
             <button onClick={logOut}>Sign Out</button>
           </li>

@@ -8,6 +8,7 @@ import MyPortfolio from './Pages/MyPortfolio/MyPortfolio';
 import Navbar from './Pages/Shared/Navbar';
 import Signup from './Pages/Signup/Signup';
 import 'react-toastify/dist/ReactToastify.css';
+import RequireAuth from './Pages/Shared/RequireAuth';
 
 function App() {
   return (
@@ -17,7 +18,14 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/myPortfolio' element={<MyPortfolio />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route
+          path='/dashboard'
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>

@@ -9,6 +9,7 @@ import Navbar from './Pages/Shared/Navbar';
 import Signup from './Pages/Signup/Signup';
 import 'react-toastify/dist/ReactToastify.css';
 import RequireAuth from './Pages/Shared/RequireAuth';
+import Purchase from './Pages/Home/Purchase';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/purchase/:id' element={<Purchase />} />
       </Routes>
 
       <ToastContainer />

@@ -4,7 +4,7 @@ const useToken = (user) => {
   const [token, setToken] = useState("");
   useEffect(() => {
     const email = user?.user?.email;
-    const userInfo = { email: email, role: "user" };
+    const userInfo = { email: email };
     if (email) {
       axios
         .put(`http://localhost:5000/user/${email}`, userInfo)

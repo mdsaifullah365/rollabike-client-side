@@ -17,6 +17,8 @@ import ManageOrders from "./Pages/Dashboard/ManageOrders";
 import AddProduct from "./Pages/Dashboard/AddProduct";
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin";
 import ManageProducts from "./Pages/Dashboard/ManageProducts";
+import RequireAdmin from "./Pages/Shared/RequireAdmin";
+import RequireGeneralUser from "./Pages/Shared/RequireGeneralUser";
 
 function App() {
   return (
@@ -34,13 +36,55 @@ function App() {
             </RequireAuth>
           }
         >
-          <Route index element={<MyOrders />} />
-          <Route path="addReview" element={<AddReview />} />
-          <Route path="myProfile" element={<MyProfile />} />
-          <Route path="manageOrders" element={<ManageOrders />} />
-          <Route path="addProduct" element={<AddProduct />} />
-          <Route path="makeAdmin" element={<MakeAdmin />} />
-          <Route path="manageProducts" element={<ManageProducts />} />
+          <Route index element={<MyProfile />} />
+          <Route
+            path="myOrders"
+            element={
+              <RequireGeneralUser>
+                <MyOrders />
+              </RequireGeneralUser>
+            }
+          />
+          <Route
+            path="addReview"
+            element={
+              <RequireGeneralUser>
+                <AddReview />
+              </RequireGeneralUser>
+            }
+          />
+          <Route
+            path="manageOrders"
+            element={
+              <RequireAdmin>
+                <ManageOrders />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="addProduct"
+            element={
+              <RequireAdmin>
+                <AddProduct />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="makeAdmin"
+            element={
+              <RequireAdmin>
+                <MakeAdmin />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="manageProducts"
+            element={
+              <RequireAdmin>
+                <ManageProducts />
+              </RequireAdmin>
+            }
+          />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

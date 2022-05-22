@@ -29,7 +29,14 @@ function App() {
         />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/purchase/:id' element={<Purchase />} />
+        <Route
+          path='/purchase/:id'
+          element={
+            <RequireAuth>
+              <Purchase />
+            </RequireAuth>
+          }
+        />
       </Routes>
 
       <ToastContainer />

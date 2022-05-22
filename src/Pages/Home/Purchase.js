@@ -1,48 +1,47 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useParams } from 'react-router-dom';
-import auth from '../../firebase.init';
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { useQuery } from 'react-query';
-import Loading from '../Shared/Loading';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useParams } from "react-router-dom";
+import auth from "../../firebase.init";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const Purchase = () => {
   // Hooks
   const { id } = useParams();
   const [user] = useAuthState(auth);
+  const [product, setProduct] = useState([]);
   const [quantity, setQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
 
-  const {
-    data: product,
-    isLoading,
-    refetch,
-  } = useQuery(['product', id], () =>
-    fetch(`http://localhost:5000/product/${id}`).then((res) => res.json())
-  );
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/product/${id}`)
+      .then((res) => setProduct(res.data));
+  }, [id]);
+
+  const { name, image, description, minimum, available, price } = product;
 
   useEffect(() => {
-    setQuantity(product?.minimum);
-  }, [product?.minimum]);
+    setQuantity(minimum);
+  }, [minimum]);
 
   useEffect(() => {
-    setTotalPrice(quantity * product?.price);
-    setGrandTotal(quantity * product?.price * 1.15);
-  }, [quantity, product?.price]);
+    setTotalPrice(quantity * price);
+    setGrandTotal(quantity * price * 1.15);
+  }, [quantity, price]);
 
   const decreaseQuantity = () => {
-    if (quantity > product?.minimum) {
+    if (quantity > minimum) {
       setQuantity(parseInt(quantity) - 1);
     }
   };
   const increaseQuantity = () => {
-    if (quantity < product?.available) {
+    if (quantity < available) {
       quantity ? setQuantity(parseInt(quantity) + 1) : setQuantity(1);
     }
   };
@@ -54,12 +53,12 @@ const Purchase = () => {
   const purchaseSchema = yup.object({
     phone: yup
       .string()
-      .max(11, 'Invalid Phone Number')
-      .required('Enter your Phone Number'),
+      .max(11, "Invalid Phone Number")
+      .required("Enter your Phone Number"),
     address: yup
       .string()
-      .max(100, 'Address must be maximum 100 characters')
-      .required('Enter your Address'),
+      .max(100, "Address must be maximum 100 characters")
+      .required("Enter your Address"),
   });
   // React Hook Form
   const {
@@ -67,7 +66,7 @@ const Purchase = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: yupResolver(purchaseSchema), mode: 'onChange' });
+  } = useForm({ resolver: yupResolver(purchaseSchema), mode: "onChange" });
 
   // Event Handler (On Submit)
   const onSubmit = async (data) => {
@@ -82,108 +81,106 @@ const Purchase = () => {
     };
     await axios.post(`http://localhost:5000/order`, order).then((result) => {
       if (result.data.insertedId) {
-        toast.success('Order Placed Successfully');
+        toast.success("Order Placed Successfully");
         reset();
       }
     });
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
-  const { name, image, description, minimum, available, price } = product;
   return (
     <div>
-      <div className='container min-h-[calc(100vh-64px)] bg-base-200 flex justify-center items-center py-10'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-          <div className='card card-compact w-full max-w-xl shadow-2xl bg-base-100'>
+      <div className="container min-h-[calc(100vh-64px)] bg-base-200 flex justify-center items-center py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="card card-compact w-full max-w-xl shadow-2xl bg-base-100">
             <figure>
               <img src={image} alt={name} />
             </figure>
-            <div className='card-body'>
-              <h2 className='card-title text-3xl'>{name}</h2>
+            <div className="card-body">
+              <h2 className="card-title text-3xl">{name}</h2>
               <p>{description}</p>
               <p>Minimum Order Quantity: {minimum}</p>
               <p>Available Quantity: {available}</p>
               <p>Price Per Unit: ${price}</p>
             </div>
           </div>
-          <div className='card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100'>
-            <form onSubmit={handleSubmit(onSubmit)} className='card-body'>
-              <div className='form-control'>
-                <label className='label'>
-                  <span className='label-text'>Name</span>
+          <div className="card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
                 </label>
                 <input
-                  type='text'
+                  type="text"
                   value={user.displayName}
-                  className='input input-bordered'
+                  className="input input-bordered"
                   disabled
                 />
               </div>
-              <div className='form-control'>
-                <label className='label'>
-                  <span className='label-text'>Email</span>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
                 </label>
                 <input
-                  type='text'
+                  type="text"
                   value={user.email}
-                  className='input input-bordered'
+                  className="input input-bordered"
                   disabled
                 />
               </div>
-              <div className='form-control'>
-                <label className='label'>
-                  <span className='label-text'>Phone Number</span>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Phone Number</span>
                 </label>
                 <input
-                  type='text'
-                  placeholder='Phone Number'
-                  className='input input-bordered'
-                  {...register('phone')}
+                  type="text"
+                  placeholder="Phone Number"
+                  className="input input-bordered"
+                  {...register("phone")}
                 />
-                <p className='mt-2 text-sm text-error'>
+                <p className="mt-2 text-sm text-error">
                   {errors.phone?.message}
                 </p>
               </div>
-              <div className='form-control'>
-                <label className='label'>
-                  <span className='label-text'>Address</span>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Address</span>
                 </label>
                 <textarea
-                  type='text'
-                  placeholder='Address'
-                  className='textarea textarea-bordered'
-                  {...register('address')}
+                  type="text"
+                  placeholder="Address"
+                  className="textarea textarea-bordered"
+                  {...register("address")}
                 />
-                <p className='mt-2 text-sm text-error'>
+                <p className="mt-2 text-sm text-error">
                   {errors.address?.message}
                 </p>
               </div>
-              <div class='form-control'>
-                <label class='label'>
-                  <span class='label-text'>Quantity</span>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Quantity</span>
                 </label>
-                <label class='input-group'>
-                  <button
-                    className='px-4 bg-accent text-2xl text-neutral'
-                    onClick={decreaseQuantity}>
+                <label class="input-group">
+                  <span
+                    className="px-4 bg-accent text-2xl text-neutral"
+                    onClick={decreaseQuantity}
+                  >
                     <AiOutlineMinus />
-                  </button>
+                  </span>
                   <input
-                    type='text'
-                    placeholder='Enter Quantity'
+                    type="text"
+                    placeholder="Enter Quantity"
                     value={quantity}
-                    class='input input-bordered w-full'
+                    class="input input-bordered w-full"
                     onChange={handleQuantityChange}
                   />
-                  <button
-                    className='px-4 bg-accent text-2xl text-neutral'
-                    onClick={increaseQuantity}>
+                  <span
+                    className="px-4 bg-accent text-2xl text-neutral"
+                    onClick={increaseQuantity}
+                  >
                     <AiOutlinePlus />
-                  </button>
+                  </span>
                 </label>
-                <p className='text-error text-sm mt-2'>
+                <p className="text-error text-sm mt-2">
                   {quantity < minimum && `Minimum Order Quantity is ${minimum}`}
                   {quantity > available && `Available Quantity is ${available}`}
                 </p>
@@ -193,7 +190,7 @@ const Purchase = () => {
                 <p>Vat (15%) : ${totalPrice * 0.15}</p>
                 <p>Grand Total: ${grandTotal.toFixed(2)}</p>
               </div>
-              <div className='form-control mt-6'>
+              <div className="form-control mt-6">
                 <button
                   disabled={
                     quantity < minimum ||
@@ -201,7 +198,8 @@ const Purchase = () => {
                     errors?.phone ||
                     errors?.address
                   }
-                  className='btn btn-primary'>
+                  className="btn btn-primary"
+                >
                   Place Order
                 </button>
               </div>

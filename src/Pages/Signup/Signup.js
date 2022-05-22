@@ -11,6 +11,7 @@ import {
 import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
 import Loading from '../Shared/Loading';
+import useToken from '../../hooks/useToken';
 
 const Signup = () => {
   // Hooks
@@ -55,13 +56,13 @@ const Signup = () => {
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName: fullName });
   };
+
+  // useToken
+  const [token] = useToken(user || googleUser);
   // Navigate
-  useEffect(() => {
-    if (user || googleUser) {
-      toast.success('Email Verification Link Sent');
-      navigate('/');
-    }
-  }, [user, googleUser, navigate]);
+  if (token) {
+    navigate('/');
+  }
 
   // Loading
   if (loading || googleLoading || updating) {

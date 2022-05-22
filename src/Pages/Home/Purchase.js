@@ -17,12 +17,22 @@ const Purchase = () => {
   const [quantity, setQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/product/${id}`)
-      .then((res) => setProduct(res.data));
-  }, [id]);
+      .get(`http://localhost:5000/product/${id}?email=${user.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((res) => setProduct(res.data))
+      .catch((err) => {
+        if (err.response.status === 401 || err.response.status === 403) {
+          setError(err.response.data.message);
+        }
+      });
+  }, [id, user.email]);
 
   const { name, image, description, minimum, available, price } = product;
 
@@ -66,7 +76,7 @@ const Purchase = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: yupResolver(purchaseSchema), mode: "onChange" });
+  } = useForm({ resolver: yupResolver(purchaseSchema), mode: "onBlur" });
 
   // Event Handler (On Submit)
   const onSubmit = async (data) => {
@@ -86,6 +96,9 @@ const Purchase = () => {
       }
     });
   };
+  if (error) {
+    return <p className="my-20 text-center text-3xl text-error">{error}</p>;
+  }
 
   return (
     <div>
@@ -161,7 +174,7 @@ const Purchase = () => {
                 </label>
                 <label class="input-group">
                   <span
-                    className="px-4 bg-accent text-2xl text-neutral"
+                    className="px-4 bg-accent text-2xl text-neutral cursor-pointer"
                     onClick={decreaseQuantity}
                   >
                     <AiOutlineMinus />
@@ -174,7 +187,7 @@ const Purchase = () => {
                     onChange={handleQuantityChange}
                   />
                   <span
-                    className="px-4 bg-accent text-2xl text-neutral"
+                    className="px-4 bg-accent text-2xl text-neutral cursor-pointer"
                     onClick={increaseQuantity}
                   >
                     <AiOutlinePlus />

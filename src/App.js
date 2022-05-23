@@ -1,45 +1,52 @@
-import { Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import Blogs from "./Pages/Blogs/Blogs";
-import Dashboard from "./Pages/Dashboard/Dashboard";
-import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login/Login";
-import MyPortfolio from "./Pages/MyPortfolio/MyPortfolio";
-import Navbar from "./Pages/Shared/Navbar";
-import Signup from "./Pages/Signup/Signup";
-import "react-toastify/dist/ReactToastify.css";
-import RequireAuth from "./Pages/Shared/RequireAuth";
-import Purchase from "./Pages/Home/Purchase";
-import MyOrders from "./Pages/Dashboard/MyOrders";
-import AddReview from "./Pages/Dashboard/AddReview";
-import MyProfile from "./Pages/Dashboard/MyProfile";
-import ManageOrders from "./Pages/Dashboard/ManageOrders";
-import AddProduct from "./Pages/Dashboard/AddProduct";
-import MakeAdmin from "./Pages/Dashboard/MakeAdmin";
-import ManageProducts from "./Pages/Dashboard/ManageProducts";
-import RequireAdmin from "./Pages/Shared/RequireAdmin";
-import RequireGeneralUser from "./Pages/Shared/RequireGeneralUser";
-import Payment from "./Pages/Dashboard/Payment";
+import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import Blogs from './Pages/Blogs/Blogs';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Home from './Pages/Home/Home';
+import Login from './Pages/Login/Login';
+import MyPortfolio from './Pages/MyPortfolio/MyPortfolio';
+import Navbar from './Pages/Shared/Navbar';
+import Signup from './Pages/Signup/Signup';
+import 'react-toastify/dist/ReactToastify.css';
+import RequireAuth from './Pages/Shared/RequireAuth';
+import Purchase from './Pages/Home/Purchase';
+import MyOrders from './Pages/Dashboard/MyOrders';
+import AddReview from './Pages/Dashboard/AddReview';
+import MyProfile from './Pages/Dashboard/MyProfile';
+import ManageOrders from './Pages/Dashboard/ManageOrders';
+import AddProduct from './Pages/Dashboard/AddProduct';
+import MakeAdmin from './Pages/Dashboard/MakeAdmin';
+import ManageProducts from './Pages/Dashboard/ManageProducts';
+import RequireAdmin from './Pages/Shared/RequireAdmin';
+import RequireGeneralUser from './Pages/Shared/RequireGeneralUser';
+import Payment from './Pages/Dashboard/Payment';
 
 function App() {
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/myPortfolio" element={<MyPortfolio />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/blogs' element={<Blogs />} />
+        <Route path='/myPortfolio' element={<MyPortfolio />} />
         <Route
-          path="/dashboard"
+          path='/dashboard'
           element={
             <RequireAuth>
               <Dashboard />
             </RequireAuth>
-          }
-        >
+          }>
+          <Route
+            path='payment/:id'
+            element={
+              <RequireGeneralUser>
+                <Payment />
+              </RequireGeneralUser>
+            }
+          />
           <Route index element={<MyProfile />} />
           <Route
-            path="myOrders"
+            path='myOrders'
             element={
               <RequireGeneralUser>
                 <MyOrders />
@@ -47,7 +54,7 @@ function App() {
             }
           />
           <Route
-            path="addReview"
+            path='addReview'
             element={
               <RequireGeneralUser>
                 <AddReview />
@@ -55,7 +62,7 @@ function App() {
             }
           />
           <Route
-            path="manageOrders"
+            path='manageOrders'
             element={
               <RequireAdmin>
                 <ManageOrders />
@@ -63,7 +70,7 @@ function App() {
             }
           />
           <Route
-            path="addProduct"
+            path='addProduct'
             element={
               <RequireAdmin>
                 <AddProduct />
@@ -71,7 +78,7 @@ function App() {
             }
           />
           <Route
-            path="makeAdmin"
+            path='makeAdmin'
             element={
               <RequireAdmin>
                 <MakeAdmin />
@@ -79,7 +86,7 @@ function App() {
             }
           />
           <Route
-            path="manageProducts"
+            path='manageProducts'
             element={
               <RequireAdmin>
                 <ManageProducts />
@@ -87,21 +94,13 @@ function App() {
             }
           />
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
         <Route
-          path="/purchase/:id"
+          path='/purchase/:id'
           element={
             <RequireAuth>
               <Purchase />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/payment/:id"
-          element={
-            <RequireAuth>
-              <Payment />
             </RequireAuth>
           }
         />

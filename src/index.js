@@ -1,23 +1,23 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import axios from "axios";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import axios from 'axios';
 
 // base URLs
-const local = "http://localhost:5000";
-// const heroku = "https://roll-a-bike.herokuapp.com";
+// const url = "http://localhost:5000";
+const url = 'https://roll-a-bike.herokuapp.com';
 
 // axios defaults
-axios.defaults.baseURL = local;
+axios.defaults.baseURL = url;
 
 // Create a client
 const queryClient = new QueryClient();
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>

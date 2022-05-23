@@ -6,14 +6,14 @@ import axiosPrivate from "../../api/axiosPrivate";
 import auth from "../../firebase.init";
 
 const CheckoutForm = ({ order }) => {
-  const { _id, bill, paid } = order;
+  const { _id, bill, paid, transactionId } = order;
   const [user] = useAuthState(auth);
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [loading, setLoading] = useState(false);
-  const [txid, setTxid] = useState("");
+  const [txid, setTxid] = useState(transactionId);
   const [isPaid, setIsPaid] = useState(paid);
   useEffect(() => {
     const amount = parseFloat(bill.toFixed(2)) * 100;
@@ -36,7 +36,7 @@ const CheckoutForm = ({ order }) => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });

@@ -1,9 +1,8 @@
 import axios from "axios";
+import { baseURL } from "../baseURL/baseURL";
 
-const url = "http://localhost:5000";
-// const url = 'https://roll-a-bike.herokuapp.com';
 const axiosPrivate = axios.create({
-  baseURL: url,
+  baseURL,
   headers: { authorization: `Bearer ${localStorage.getItem("accessToken")}` },
 });
 

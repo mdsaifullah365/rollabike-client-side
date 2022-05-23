@@ -6,13 +6,10 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import axios from "axios";
-
-// base URLs
-const url = "http://localhost:5000";
-// const url = 'https://roll-a-bike.herokuapp.com';
+import { baseURL } from "./baseURL/baseURL";
 
 // axios defaults
-axios.defaults.baseURL = url;
+axios.defaults.baseURL = baseURL;
 
 // Create a client
 const queryClient = new QueryClient();

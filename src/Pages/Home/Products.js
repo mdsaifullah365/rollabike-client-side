@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 
 const Products = () => {
   const { data: products, isLoading } = useQuery("products", () =>
-    axios.get("https://roll-a-bike.herokuapp.com/product")
+    axios.get("/product")
   );
   if (isLoading) {
     return <Loading />;

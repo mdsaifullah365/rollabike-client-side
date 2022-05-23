@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import axiosPrivate from "../../api/axiosPrivate";
 
 const Purchase = () => {
   // Hooks
@@ -20,15 +21,8 @@ const Purchase = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios
-      .get(
-        `https://roll-a-bike.herokuapp.com/product/${id}?email=${user.email}`,
-        {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+    axiosPrivate
+      .get(`/product/${id}?email=${user.email}`)
       .then((res) => setProduct(res.data))
       .catch((err) => {
         if (err.response.status === 401 || err.response.status === 403) {
@@ -93,7 +87,7 @@ const Purchase = () => {
       bill: grandTotal,
     };
     await axios
-      .post(`https://roll-a-bike.herokuapp.com/order`, order)
+      .post(`/order`, order)
       .then((result) => {
         if (result.data.insertedId) {
           toast.success("Order Placed Successfully");

@@ -6,14 +6,12 @@ const useToken = (user) => {
     const email = user?.user?.email;
     const userInfo = { email: email };
     if (email) {
-      axios
-        .put(`https://roll-a-bike.herokuapp.com/user/${email}`, userInfo)
-        .then((data) => {
-          console.log(data);
-          const accessToken = data.data.token;
-          localStorage.setItem("accessToken", accessToken);
-          setToken(accessToken);
-        });
+      axios.put(`/user/${email}`, userInfo).then((data) => {
+        console.log(data);
+        const accessToken = data.data.token;
+        localStorage.setItem("accessToken", accessToken);
+        setToken(accessToken);
+      });
     }
   }, [user?.user?.email]);
 

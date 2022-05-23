@@ -1,16 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axiosPrivate from "../api/axiosPrivate";
 
 const useAdmin = (user) => {
   const [admin, setAdmin] = useState(false);
   const [adminLoading, setAdminLoading] = useState(true);
   useEffect(() => {
-    axios
-      .get(`https://roll-a-bike.herokuapp.com/admin?email=${user?.email}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+    axiosPrivate
+      .get(`/admin?email=${user?.email}`)
       .then((res) => {
         setAdmin(res.data.admin);
         setAdminLoading(false);

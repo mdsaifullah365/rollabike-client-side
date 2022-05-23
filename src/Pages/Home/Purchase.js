@@ -21,11 +21,14 @@ const Purchase = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/product/${id}?email=${user.email}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      .get(
+        `https://roll-a-bike.herokuapp.com/product/${id}?email=${user.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
       .then((res) => setProduct(res.data))
       .catch((err) => {
         if (err.response.status === 401 || err.response.status === 403) {
@@ -89,12 +92,14 @@ const Purchase = () => {
       quantity: quantity,
       bill: grandTotal,
     };
-    await axios.post(`http://localhost:5000/order`, order).then((result) => {
-      if (result.data.insertedId) {
-        toast.success("Order Placed Successfully");
-        reset();
-      }
-    });
+    await axios
+      .post(`https://roll-a-bike.herokuapp.com/order`, order)
+      .then((result) => {
+        if (result.data.insertedId) {
+          toast.success("Order Placed Successfully");
+          reset();
+        }
+      });
   };
   if (error) {
     return <p className="my-20 text-center text-3xl text-error">{error}</p>;

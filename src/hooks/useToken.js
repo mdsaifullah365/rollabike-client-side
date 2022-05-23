@@ -7,7 +7,7 @@ const useToken = (user) => {
     const userInfo = { email: email };
     if (email) {
       axios
-        .put(`http://localhost:5000/user/${email}`, userInfo)
+        .put(`https://roll-a-bike.herokuapp.com/user/${email}`, userInfo)
         .then((data) => {
           console.log(data);
           const accessToken = data.data.token;

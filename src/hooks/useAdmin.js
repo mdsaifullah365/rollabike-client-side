@@ -6,7 +6,7 @@ const useAdmin = (user) => {
   const [adminLoading, setAdminLoading] = useState(true);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/admin?email=${user?.email}`, {
+      .get(`https://roll-a-bike.herokuapp.com/admin?email=${user?.email}`, {
         headers: {
           authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },

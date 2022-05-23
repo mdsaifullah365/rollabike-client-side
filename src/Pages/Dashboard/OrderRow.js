@@ -1,8 +1,8 @@
 import React from "react";
-import axiosPrivate from "../../api/axiosPrivate";
+import { Link } from "react-router-dom";
 
 const OrderRow = ({ order, refetch, setModal }) => {
-  const { productName, productImage, quantity, bill, paid } = order;
+  const { _id, productName, productImage, quantity, bill, paid } = order;
 
   return (
     <tr>
@@ -31,9 +31,15 @@ const OrderRow = ({ order, refetch, setModal }) => {
         ) : (
           <p className="text-red-600">Not Paid</p>
         )}
-        <span className="badge badge-ghost badge-sm">
-          Desktop Support Technician
-        </span>
+        {paid ? (
+          <span className="badge badge-ghost badge-sm">
+            Desktop Support Technician
+          </span>
+        ) : (
+          <Link to={`/payment/${_id}`} className="btn btn-xs btn-success">
+            Pay Now
+          </Link>
+        )}
       </td>
       <th>
         {paid ? (

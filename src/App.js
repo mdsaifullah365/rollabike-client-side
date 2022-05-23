@@ -19,6 +19,7 @@ import MakeAdmin from "./Pages/Dashboard/MakeAdmin";
 import ManageProducts from "./Pages/Dashboard/ManageProducts";
 import RequireAdmin from "./Pages/Shared/RequireAdmin";
 import RequireGeneralUser from "./Pages/Shared/RequireGeneralUser";
+import Payment from "./Pages/Dashboard/Payment";
 
 function App() {
   return (
@@ -93,6 +94,14 @@ function App() {
           element={
             <RequireAuth>
               <Purchase />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/payment/:id"
+          element={
+            <RequireAuth>
+              <Payment />
             </RequireAuth>
           }
         />

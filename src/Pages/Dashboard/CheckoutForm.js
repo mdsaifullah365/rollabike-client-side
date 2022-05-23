@@ -1,62 +1,124 @@
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useState } from 'react';
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
+import axiosPrivate from "../../api/axiosPrivate";
+import auth from "../../firebase.init";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ order }) => {
+  const { _id, bill, paid } = order;
+  const [user] = useAuthState(auth);
   const stripe = useStripe();
   const elements = useElements();
-  const [cardError, setCardError] = useState('');
+  const [cardError, setCardError] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [txid, setTxid] = useState("");
+  const [isPaid, setIsPaid] = useState(paid);
+  useEffect(() => {
+    const amount = parseFloat(bill.toFixed(2)) * 100;
+    axiosPrivate
+      .post("/create-payment-intent", { amount })
+      .then((res) => setClientSecret(res.data.clientSecret));
+  }, [bill]);
 
   const handleSubmit = async (event) => {
-    // Block native form submission.
     event.preventDefault();
-    setCardError('');
+    setCardError("");
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
 
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
     const card = elements.getElement(CardElement);
 
     if (card == null) {
       return;
     }
 
-    // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
+      type: "card",
       card,
     });
-    setCardError(error?.message || '');
 
-    console.log('[PaymentMethod]', paymentMethod);
+    if (error?.message) {
+      setCardError(error.message);
+    } else {
+      setLoading(true);
+    }
+    const { paymentIntent, error: intentError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name: user.displayName,
+            email: user.email,
+          },
+        },
+      });
+    if (intentError) {
+      setLoading(false);
+      setCardError(intentError.message);
+    } else {
+      setLoading(false);
+      setCardError("");
+      axiosPrivate
+        .put(`/order/${_id}?email=${user.email}`, {
+          transactionId: paymentIntent.id,
+        })
+        .then((res) => {
+          if (res.data.modifiedCount === 1) {
+            toast.success("Payment Successfull");
+            setTxid(paymentIntent.id);
+            setIsPaid(true);
+          }
+        });
+    }
   };
 
+  if (loading) {
+    return (
+      <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 p-10">
+        <div className="w-20 h-20 border-b-2 border-primary rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+  if (isPaid) {
+    return (
+      <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 p-10">
+        <div className="">
+          <p className="text-green-500 text-3xl">Paid</p>
+          <p className="text-green-500 text-md">TXNID: {txid}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className='card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 p-10'>
+    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 p-10">
       <form onSubmit={handleSubmit}>
         <CardElement
           options={{
             style: {
               base: {
-                fontSize: '16px',
-                color: '#424770',
-                '::placeholder': {
-                  color: '#aab7c4',
+                fontSize: "16px",
+                color: "#424770",
+                "::placeholder": {
+                  color: "#aab7c4",
                 },
               },
               invalid: {
-                color: '#9e2146',
+                color: "#9e2146",
               },
             },
           }}
         />
-        {cardError && <p className='text-error'>{cardError}</p>}
-        <button type='submit' className='mt-5' disabled={!stripe}>
+        {cardError && <p className="text-error">{cardError}</p>}
+        <button
+          type="submit"
+          className="mt-5 btn btn-sm btn-success"
+          disabled={!stripe || !clientSecret}
+        >
           Pay
         </button>
       </form>

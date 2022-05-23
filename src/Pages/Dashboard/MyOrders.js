@@ -29,11 +29,6 @@ const MyOrders = () => {
         <table className="table w-full">
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
               <th>Product Name</th>
               <th>Price</th>
               <th>Payment Status</th>

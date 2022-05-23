@@ -8,11 +8,11 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import axios from "axios";
 
 // base URLs
-// const local = 'http://localhost:5000'
-const heroku = "https://roll-a-bike.herokuapp.com";
+const local = "http://localhost:5000";
+// const heroku = "https://roll-a-bike.herokuapp.com";
 
 // axios defaults
-axios.defaults.baseURL = heroku;
+axios.defaults.baseURL = local;
 
 // Create a client
 const queryClient = new QueryClient();

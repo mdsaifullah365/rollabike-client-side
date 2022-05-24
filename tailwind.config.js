@@ -16,10 +16,10 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: '#fdb819',
-          secondary: '#f6d860',
-          accent: '#212121',
-          neutral: '#81858c',
+          primary: '#EEB76B',
+          secondary: '#082032',
+          accent: '#2C394B',
+          neutral: '#334756',
           'base-100': '#ffffff',
         },
       },

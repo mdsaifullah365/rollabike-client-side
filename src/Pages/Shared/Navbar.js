@@ -1,8 +1,8 @@
-import { signOut } from "firebase/auth";
-import React from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useLocation } from "react-router-dom";
-import auth from "../../firebase.init";
+import { signOut } from 'firebase/auth';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link, useLocation } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Navbar = () => {
   // useAuthState
@@ -15,23 +15,24 @@ const Navbar = () => {
   // Event Handler (Log Out)
   const logOut = () => {
     signOut(auth);
+    localStorage.removeItem('accessToken');
   };
   const navLinks = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <Link to='/'>Home</Link>
       </li>
       <li>
-        <Link to="/blogs">Blogs</Link>
+        <Link to='/blogs'>Blogs</Link>
       </li>
       <li>
-        <Link to="/myPortfolio">My Portfolio</Link>
+        <Link to='/myPortfolio'>My Portfolio</Link>
       </li>
 
       {user ? (
         <>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to='/dashboard'>Dashboard</Link>
           </li>
           <li>
             <button onClick={logOut}>Log Out</button>
@@ -40,72 +41,68 @@ const Navbar = () => {
       ) : (
         <>
           <li>
-            <Link to="/login">Login</Link>
+            <Link to='/login'>Login</Link>
           </li>
           <li>
-            <Link to="/signup">Sign Up</Link>
+            <Link to='/signup'>Sign Up</Link>
           </li>
         </>
       )}
     </>
   );
   return (
-    <div className="navbar justify-between bg-white sticky top-0 z-10">
+    <div className='navbar justify-between bg-white sticky top-0 z-10'>
       <div>
-        <div className="dropdown">
-          <label tabIndex="0" className="btn btn-ghost lg:hidden">
+        <div className='dropdown'>
+          <label tabIndex='0' className='btn btn-ghost lg:hidden'>
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-5 w-5'
+              fill='none'
+              viewBox='0 0 24 24'
+              stroke='currentColor'>
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M4 6h16M4 12h8m-8 6h16'
               />
             </svg>
           </label>
 
           <ul
-            tabIndex="0"
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
+            tabIndex='0'
+            className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'>
             {navLinks}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
+        <Link to='/' className='btn btn-ghost normal-case text-xl'>
           RollaBike
         </Link>
       </div>
 
-      {user && <p className="text-primary">{user?.displayName}</p>}
+      {user && <p className='text-primary'>{user?.displayName}</p>}
 
-      <div className="hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">{navLinks}</ul>
+      <div className='hidden lg:flex'>
+        <ul className='menu menu-horizontal p-0'>{navLinks}</ul>
       </div>
 
-      {path.includes("/dashboard") && (
+      {path.includes('/dashboard') && (
         <label
-          tabIndex="1"
-          className="btn btn-ghost drawer-button lg:hidden"
-          htmlFor="dashboard-drawer"
-        >
+          tabIndex='1'
+          className='btn btn-ghost drawer-button lg:hidden'
+          htmlFor='dashboard-drawer'>
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
+            xmlns='http://www.w3.org/2000/svg'
+            className='h-5 w-5'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'>
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h8m-8 6h16"
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth='2'
+              d='M4 6h16M4 12h8m-8 6h16'
             />
           </svg>
         </label>

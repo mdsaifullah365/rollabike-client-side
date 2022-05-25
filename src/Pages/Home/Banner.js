@@ -23,8 +23,8 @@ const Banner = () => {
     <>
       <Swiper
         style={{
-          '--swiper-navigation-color': '#e2e8f0',
-          '--swiper-pagination-color': '#38bdf8',
+          '--swiper-navigation-color': '#ffffff',
+          '--swiper-pagination-color': '#ffffff',
         }}
         navigation={true}
         loop={true}
@@ -46,8 +46,8 @@ const Banner = () => {
           <div className='container grid md:grid-cols-2 items-center gap-10 bg-neutral text-base-200 py-24 md:py-40'>
             <div className='px-5'>
               <h1 className='text-5xl mb-5 leading-snug'>
-                Motorcycle Parts At Best{' '}
-                <span className='text-primary'>Price Ever</span>
+                Essential Motorcycle{' '}
+                <span className='text-primary'>Parts At Best Price Ever</span>
               </h1>
               <p className='text-xl'>
                 We ensure you to give you best motorcycle parts at best prices.

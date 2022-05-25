@@ -55,8 +55,8 @@ const AboutUs = () => {
           <div className='relative p-6'>
             <div className='absolute top-0 right-0 bottom-0 left-0 bg-secondary opacity-60  rounded-md'></div>
             <p className='text-2xl leading-relaxed relative'>
-              RollaBike Are A Industry & Manufacturing Services Provider
-              Institutions. Suitable For Factory, Manufacturing, Industry,
+              RollaBike Is A Industry & Manufacturing Services Provider
+              Institution. Suitable For Factory, Manufacturing, Industry,
               Engineering, Construction And Any Related Industry Care Field.
             </p>
           </div>

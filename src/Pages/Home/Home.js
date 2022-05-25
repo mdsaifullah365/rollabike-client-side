@@ -4,6 +4,7 @@ import AboutUs from './AboutUs';
 import Products from './Products';
 import Reviews from './Reviews';
 import BusinessSummary from './BusinessSummary';
+import Support from './Support';
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <AboutUs />
       <Products />
       <Reviews />
+      <Support />
     </main>
   );
 };

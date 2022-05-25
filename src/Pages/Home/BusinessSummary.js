@@ -43,10 +43,10 @@ const BusinessSummary = () => {
           We Serve Our Customer the Best
         </h2>
         <div className='mt-6 flex gap-5 justify-center'>
-          <div className='btn btn-primary'>Take a Tour</div>
-          <div className='btn btn-outline text-base-200 hover:bg-primary hover:text-secondary'>
+          <button className='btn btn-primary'>Take a Tour</button>
+          <button className='btn btn-outline text-base-200 hover:bg-primary hover:text-secondary'>
             Contact Us
-          </div>
+          </button>
         </div>
       </div>
     </section>

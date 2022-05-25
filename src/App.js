@@ -20,6 +20,7 @@ import ManageProducts from './Pages/Dashboard/ManageProducts';
 import RequireAdmin from './Pages/Shared/RequireAdmin';
 import RequireGeneralUser from './Pages/Shared/RequireGeneralUser';
 import Payment from './Pages/Dashboard/Payment';
+import Footer from './Pages/Shared/Footer';
 
 function App() {
   return (
@@ -105,7 +106,7 @@ function App() {
           }
         />
       </Routes>
-
+      <Footer />
       <ToastContainer />
     </>
   );

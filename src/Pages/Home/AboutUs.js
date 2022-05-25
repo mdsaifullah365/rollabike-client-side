@@ -40,11 +40,15 @@ const AboutUs = () => {
         background: `url('${img}') no-repeat center center/cover`,
       }}>
       <div className='absolute top-0 right-0 bottom-0 left-0 bg-secondary opacity-60'></div>
+      {/* Title */}
       <div className='text-white py-20 relative z-10'>
+        <div className='text-5xl text-center text-base-100 mb-16 uppercase'>
+          About <span className='text-primary'>Us</span>
+        </div>
         {/* First Part */}
-        <div className='max-w-6xl px-12 mx-auto flex flex-col md:flex-row items-end gap-20'>
+        <div className='max-w-6xl px-12 mx-auto grid grid-cols-1 md:grid-cols-2 items-end gap-10'>
           <div>
-            <h2 className='text-6xl font-bold'>
+            <h2 className='text-5xl leading-snug'>
               RollaBike Provides The Best Service For Sustainable Progress
             </h2>
           </div>

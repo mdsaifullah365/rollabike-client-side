@@ -9,10 +9,10 @@ const Reviews = () => {
   }, []);
   return (
     <section className='container my-20'>
-      <div className='text-center text-3xl font-bold mb-10'>
-        Customer Reviews
+      <div className='text-4xl text-center text-base-100 mb-12 uppercase'>
+        Customer <span className='text-primary'>Reviews</span>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
         {reviews.map((r) => (
           <ReviewCard r={r} key={r._id} />
         ))}

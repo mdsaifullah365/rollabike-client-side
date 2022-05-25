@@ -3,11 +3,11 @@ import React from 'react';
 const ReviewCard = ({ r }) => {
   const { name, rating, review, photoURL } = r;
   return (
-    <div class='card bg-base-100 shadow-xl'>
+    <div class='card bg-neutral hover:shadow-lg text-white'>
       <div class='card-body'>
         <div class='flex items-center space-x-3 mb-3'>
           <div class='avatar'>
-            <div class='mask mask-squircle w-12 h-12 bg-slate-700'>
+            <div class='mask mask-squircle w-12 h-12 bg-secondary'>
               {photoURL ? (
                 <img src={photoURL} alt={name} />
               ) : (

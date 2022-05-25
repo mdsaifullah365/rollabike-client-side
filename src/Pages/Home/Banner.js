@@ -41,9 +41,9 @@ const Banner = () => {
         }}
         zoom={true}
         modules={[Navigation, Pagination, EffectFade, Keyboard, Autoplay, Zoom]}
-        className='mySwiper mb-20 bg-neutral'>
+        className='mySwiper bg-accent mb-8'>
         <SwiperSlide>
-          <div className='container grid md:grid-cols-2 items-center gap-10 bg-neutral text-base-200 py-24 md:py-40'>
+          <div className='container grid md:grid-cols-2 items-center gap-10 bg-accent text-base-200 py-24 md:py-40'>
             <div className='px-5'>
               <h1 className='text-5xl mb-5 leading-snug'>
                 Essential Motorcycle{' '}
@@ -61,7 +61,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className='container grid md:grid-cols-2 items-center gap-10 bg-neutral text-base-200 py-24 md:py-40'>
+          <div className='container grid md:grid-cols-2 items-center gap-10 bg-accent text-base-200 py-24 md:py-40'>
             <div className='px-5'>
               <h1 className='text-5xl mb-5 leading-snug'>
                 Connect Our Customer{' '}

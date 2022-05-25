@@ -23,9 +23,9 @@ const Footer = () => {
         </div>
         <div>
           <span className='footer-title'>Company</span>
-          <Link to={'/aboutUs'} className='link link-hover'>
+          <a href='#about-us' className='link link-hover'>
             About us
-          </Link>
+          </a>
           <Link to={'/contact'} className='link link-hover'>
             Contact
           </Link>

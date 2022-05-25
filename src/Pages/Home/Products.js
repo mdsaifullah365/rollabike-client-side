@@ -12,8 +12,8 @@ const Products = () => {
     return <Loading />;
   }
   return (
-    <section className='container my-20'>
-      <div className='text-4xl text-center text-base-100 mb-12 uppercase'>
+    <section className='container mx-auto my-28'>
+      <div className='text-5xl text-center text-base-100 mb-16 uppercase'>
         RollaBike <span className='text-primary'>Parts</span>
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>

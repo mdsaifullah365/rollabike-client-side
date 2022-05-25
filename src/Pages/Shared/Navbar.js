@@ -123,7 +123,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className='navbar justify-between bg-secondary sticky top-0 z-10'>
+    <div className='navbar justify-between bg-secondary sticky top-0 z-50'>
       <div>
         <div className='dropdown'>
           <label

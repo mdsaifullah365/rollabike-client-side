@@ -41,7 +41,7 @@ const Banner = () => {
         }}
         zoom={true}
         modules={[Navigation, Pagination, EffectFade, Keyboard, Autoplay, Zoom]}
-        className='mySwiper bg-accent mb-8'>
+        className='mySwiper bg-accent mb-40'>
         <SwiperSlide>
           <div className='container grid md:grid-cols-2 items-center gap-10 bg-accent text-base-200 py-24 md:py-40'>
             <div className='px-5'>

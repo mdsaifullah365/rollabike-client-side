@@ -21,6 +21,7 @@ import RequireAdmin from './Pages/Shared/RequireAdmin';
 import RequireGeneralUser from './Pages/Shared/RequireGeneralUser';
 import Payment from './Pages/Dashboard/Payment';
 import Footer from './Pages/Shared/Footer';
+import NotFound from './NotFound/NotFound';
 
 function App() {
   return (
@@ -105,6 +106,7 @@ function App() {
             </RequireAuth>
           }
         />
+        <Route path='/*' element={<NotFound />} />
       </Routes>
       <Footer />
       <ToastContainer />

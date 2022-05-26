@@ -77,12 +77,12 @@ const Signup = () => {
 
   return (
     <div className='min-h-[calc(100vh-64px)] flex justify-center items-center'>
-      <div className='flex flex-col w-full max-w-md shadow-lg p-8'>
+      <div className='flex flex-col w-full max-w-md shadow-lg p-8 bg-neutral text-base-100'>
         <h2 className='text-center text-4xl uppercase mb-10'>Sign Up</h2>
         {signUpError}
         <button
           onClick={() => signInWithGoogle()}
-          className='btn btn-outline uppercase mb-2'>
+          className='btn btn-outline text-base-100 hover:bg-secondary uppercase mb-2'>
           Signup with Google
         </button>
 
@@ -91,12 +91,14 @@ const Signup = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='form-control w-full'>
             <label className='label'>
-              <span className='label-text text-base'>Full Name</span>
+              <span className='label-text text-base-100 text-base'>
+                Full Name
+              </span>
             </label>
             <input
               type='text'
               placeholder='Full Name'
-              className='input input-bordered w-full'
+              className='input input-bordered text-secondary w-full'
               {...register('fullName')}
             />
             <p className='mt-2 text-sm text-error'>
@@ -106,12 +108,12 @@ const Signup = () => {
 
           <div className='form-control w-full'>
             <label className='label'>
-              <span className='label-text text-base'>Email</span>
+              <span className='label-text text-base-100 text-base'>Email</span>
             </label>
             <input
               type='text'
               placeholder='Email'
-              className='input input-bordered w-full'
+              className='input input-bordered text-secondary w-full'
               {...register('email')}
             />
             <p className='mt-2 text-sm text-error'>{errors.email?.message}</p>
@@ -119,12 +121,14 @@ const Signup = () => {
 
           <div className='form-control w-full'>
             <label className='label'>
-              <span className='label-text text-base'>Password</span>
+              <span className='label-text text-base-100 text-base'>
+                Password
+              </span>
             </label>
             <input
               type='password'
               placeholder='Password'
-              className='input input-bordered w-full'
+              className='input input-bordered text-secondary w-full'
               {...register('password')}
             />
             <p className='mt-2 text-sm text-error'>
@@ -134,12 +138,14 @@ const Signup = () => {
 
           <div className='form-control w-full'>
             <label className='label'>
-              <span className='label-text text-base'>Confirm Password</span>
+              <span className='label-text text-base-100 text-base'>
+                Confirm Password
+              </span>
             </label>
             <input
               type='password'
               placeholder='Confirm Password'
-              className='input input-bordered w-full'
+              className='input input-bordered text-secondary w-full'
               {...register('confirmPassword')}
             />
             <p className='mt-2 text-sm text-error'>

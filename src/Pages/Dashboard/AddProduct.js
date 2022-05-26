@@ -60,6 +60,7 @@ const AddProduct = () => {
             available,
             price,
             image,
+            admin: user.email,
           };
           axios.post(`/product?email=${user.email}`, product).then((data) => {
             console.log(data);

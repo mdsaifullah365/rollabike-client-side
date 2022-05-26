@@ -17,17 +17,15 @@ const Purchase = () => {
   const [quantity, setQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
-  const [error, setError] = useState('');
 
   useEffect(() => {
-    axios
-      .get(`/product/${id}?email=${user.email}`)
-      .then((res) => setProduct(res.data))
-      .catch((err) => {
-        if (err.response.status === 401 || err.response.status === 403) {
-          setError(err.response.data.message);
-        }
-      });
+    fetch(`http://localhost:5000/product/${id}?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setProduct(data));
   }, [id, user.email]);
 
   const { name, image, description, minimum, available, price } = product;
@@ -93,17 +91,14 @@ const Purchase = () => {
       }
     });
   };
-  if (error) {
-    return <p className='my-20 text-center text-3xl text-error'>{error}</p>;
-  }
 
   return (
     <div>
-      <div className='container min-h-[calc(100vh-64px)] bg-base-200 flex justify-center items-center py-10'>
+      <div className='container min-h-[calc(100vh-64px)] flex justify-center items-center py-10'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
-          <div className='card card-compact w-full max-w-xl shadow-2xl bg-base-100'>
-            <figure>
-              <img src={image} alt={name} />
+          <div className='card card-compact w-full max-w-xl shadow-md bg-neutral text-base-100'>
+            <figure className='w-3/4 mx-auto m-5 rounded-2xl'>
+              <img src={image} alt={name} className='rounded-2xl' />
             </figure>
             <div className='card-body'>
               <h2 className='card-title text-3xl'>{name}</h2>
@@ -113,38 +108,38 @@ const Purchase = () => {
               <p>Price Per Unit: ${price}</p>
             </div>
           </div>
-          <div className='card flex-shrink-0 w-full max-w-xl shadow-2xl bg-base-100'>
+          <div className='card flex-shrink-0 w-full max-w-xl shadow-md bg-neutral text-base-100'>
             <form onSubmit={handleSubmit(onSubmit)} className='card-body'>
               <div className='form-control'>
                 <label className='label'>
-                  <span className='label-text'>Name</span>
+                  <span className='label-text text-base-100'>Name</span>
                 </label>
                 <input
                   type='text'
                   value={user.displayName}
-                  className='input input-bordered'
+                  className='input input-bordered text-secondary'
                   disabled
                 />
               </div>
               <div className='form-control'>
                 <label className='label'>
-                  <span className='label-text'>Email</span>
+                  <span className='label-text text-base-100'>Email</span>
                 </label>
                 <input
                   type='text'
                   value={user.email}
-                  className='input input-bordered'
+                  className='input input-bordered text-secondary'
                   disabled
                 />
               </div>
               <div className='form-control'>
                 <label className='label'>
-                  <span className='label-text'>Phone Number</span>
+                  <span className='label-text text-base-100'>Phone Number</span>
                 </label>
                 <input
                   type='text'
                   placeholder='Phone Number'
-                  className='input input-bordered'
+                  className='input input-bordered text-secondary'
                   {...register('phone')}
                 />
                 <p className='mt-2 text-sm text-error'>
@@ -153,12 +148,12 @@ const Purchase = () => {
               </div>
               <div className='form-control'>
                 <label className='label'>
-                  <span className='label-text'>Address</span>
+                  <span className='label-text text-base-100'>Address</span>
                 </label>
                 <textarea
                   type='text'
                   placeholder='Address'
-                  className='textarea textarea-bordered'
+                  className='textarea textarea-bordered text-secondary'
                   {...register('address')}
                 />
                 <p className='mt-2 text-sm text-error'>
@@ -167,11 +162,11 @@ const Purchase = () => {
               </div>
               <div class='form-control'>
                 <label class='label'>
-                  <span class='label-text'>Quantity</span>
+                  <span class='label-text text-base-100'>Quantity</span>
                 </label>
                 <label class='input-group'>
                   <span
-                    className='px-4 bg-accent text-2xl text-neutral cursor-pointer'
+                    className='px-4 bg-primary text-secondary  text-2xl  cursor-pointer'
                     onClick={decreaseQuantity}>
                     <AiOutlineMinus />
                   </span>
@@ -179,11 +174,11 @@ const Purchase = () => {
                     type='text'
                     placeholder='Enter Quantity'
                     value={quantity}
-                    class='input input-bordered w-full'
+                    class='input input-bordered text-secondary w-full'
                     onChange={handleQuantityChange}
                   />
                   <span
-                    className='px-4 bg-accent text-2xl text-neutral cursor-pointer'
+                    className='px-4 bg-primary text-secondary text-2xl  cursor-pointer'
                     onClick={increaseQuantity}>
                     <AiOutlinePlus />
                   </span>
@@ -206,7 +201,7 @@ const Purchase = () => {
                     errors?.phone ||
                     errors?.address
                   }
-                  className='btn btn-primary'>
+                  className='btn btn-secondary'>
                   Place Order
                 </button>
               </div>

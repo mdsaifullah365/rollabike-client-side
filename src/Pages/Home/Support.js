@@ -2,8 +2,7 @@ import React from 'react';
 import { GiHomeGarage } from 'react-icons/gi';
 import FAQ from './FAQ';
 import { CgPhone } from 'react-icons/cg';
-
-const img = 'https://i.ibb.co/k0BTQ1b/factory.jpg';
+import img from '../../images/industry.jpg';
 
 const Support = () => {
   const faq = [

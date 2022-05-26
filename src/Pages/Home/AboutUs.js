@@ -3,8 +3,7 @@ import { HiLightBulb } from 'react-icons/hi';
 import { AiOutlineTeam } from 'react-icons/ai';
 import { MdOutlineBiotech, MdOutlineDeliveryDining } from 'react-icons/md';
 import AboutInfoCard from './AboutInfoCard';
-
-const img = 'https://i.ibb.co/k0BTQ1b/factory.jpg';
+import img from '../../images/factory.jpg';
 
 const AboutUs = () => {
   const aboutInfo = [

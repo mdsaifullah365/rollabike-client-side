@@ -1,6 +1,5 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
@@ -16,12 +15,16 @@ const Payment = () => {
   const { id } = useParams();
   const [user] = useAuthState(auth);
   const { data: order, isLoading } = useQuery(['order', id], () =>
-    axios.get(`/order/${id}?email=${user.email}`)
+    fetch(`http://localhost:5000/order/${id}?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading />;
   }
-  const { productName, productImage, quantity, bill } = order.data;
+  const { productName, productImage, quantity, bill } = order;
   return (
     <div className='hero min-h-screen bg-base-200'>
       <div className='hero-content flex-col lg:flex-row'>
@@ -43,7 +46,7 @@ const Payment = () => {
         </div>
 
         <Elements stripe={stripePromise}>
-          <CheckoutForm order={order.data} />
+          <CheckoutForm order={order} />
         </Elements>
       </div>
     </div>

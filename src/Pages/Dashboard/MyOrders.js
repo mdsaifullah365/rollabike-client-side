@@ -14,7 +14,11 @@ const MyOrders = () => {
     isLoading,
     refetch,
   } = useQuery(['orders', user.email], () =>
-    axios.get(`/order?email=${user.email}`)
+    fetch(`http://localhost:5000/order?email=${user.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }).then((res) => res.json())
   );
   const [modal, setModal] = useState(null);
   console.log(modal);
@@ -36,7 +40,7 @@ const MyOrders = () => {
             </tr>
           </thead>
           <tbody>
-            {orders?.data?.map((order) => (
+            {orders?.map((order) => (
               <OrderRow key={order._id} order={order} setModal={setModal} />
             ))}
           </tbody>

@@ -17,7 +17,13 @@ const MakeAdmin = () => {
     isLoading,
     error,
     refetch,
-  } = useQuery('users', () => axios.get(`/user?email=${adminEmail}`));
+  } = useQuery('users', () =>
+    fetch(`http://localhost:5000/user?email=${adminEmail}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }).then((res) => res.json())
+  );
   if (isLoading) {
     return <Loading />;
   }
@@ -46,7 +52,7 @@ const MakeAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {users?.data?.map((user, i) => (
+              {users?.map((user, i) => (
                 <UserRow
                   key={user._id}
                   user={user}

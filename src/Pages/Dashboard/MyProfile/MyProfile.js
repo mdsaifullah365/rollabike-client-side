@@ -8,7 +8,6 @@ import UpdateLinkedIn from './UpdateLinkedIn';
 import UpdatePhone from './UpdatePhone';
 import auth from '../../../firebase.init';
 import UpdateProfile from './UpdateProfile';
-import axios from 'axios';
 
 const MyProfile = () => {
   const [user] = useAuthState(auth);
@@ -19,14 +18,22 @@ const MyProfile = () => {
   const handleShowForm = () => {
     setShowForm(!showForm);
   };
-  const { data, isLoading, refetch } = useQuery('mongoUser', () =>
-    axios.get(`/user/${email}?email=${email}`)
+  const {
+    data: userProfile,
+    isLoading,
+    refetch,
+  } = useQuery('mongoUser', () =>
+    fetch(`http://localhost:5000/user/${email}?email=${email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }).then((res) => res.json())
   );
 
   if (isLoading) {
     return <Loading />;
   }
-  const { address, phone, education, linkedin } = data.data;
+  const { address, phone, education, linkedin } = userProfile;
 
   return (
     <div className='bg-neutral p-5 my-5 text-base-200'>
@@ -134,7 +141,7 @@ const MyProfile = () => {
 
         {showForm && (
           <UpdateProfile
-            mongoUser={data.data}
+            mongoUser={userProfile}
             user={user}
             handleShowForm={handleShowForm}
             refetch={refetch}

@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import CustomLink from './CustomLink';
 import { FiLogOut } from 'react-icons/fi';
@@ -9,6 +9,9 @@ import { FiLogOut } from 'react-icons/fi';
 const Navbar = () => {
   // useAuthState
   const [user] = useAuthState(auth);
+
+  // Navigate
+  const navigate = useNavigate();
 
   // DropdownStates
   const [avatarDropdown, setAvatarDropdown] = useState(false);
@@ -23,6 +26,7 @@ const Navbar = () => {
   const logOut = () => {
     signOut(auth);
     localStorage.removeItem('accessToken');
+    navigate('/', { replace: true });
   };
 
   // Toggle dropdown

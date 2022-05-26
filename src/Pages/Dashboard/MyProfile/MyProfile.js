@@ -23,7 +23,7 @@ const MyProfile = () => {
     isLoading,
     refetch,
   } = useQuery('mongoUser', () =>
-    fetch(`http://localhost:5000/user/${email}?email=${email}`, {
+    fetch(`https://rollabike.herokuapp.com/user/${email}?email=${email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },

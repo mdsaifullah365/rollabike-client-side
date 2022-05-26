@@ -43,7 +43,7 @@ const AddReview = () => {
       review,
     };
 
-    fetch(`http://localhost:5000/review?email=${user.email}`, {
+    fetch(`https://rollabike.herokuapp.com/review?email=${user.email}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

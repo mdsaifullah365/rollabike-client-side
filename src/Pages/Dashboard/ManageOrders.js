@@ -13,7 +13,7 @@ const ManageOrders = () => {
     isLoading,
     refetch,
   } = useQuery(['ordersAdmin', user.email], () =>
-    fetch(`http://localhost:5000/order/all?email=${user.email}`, {
+    fetch(`https://rollabike.herokuapp.com/order/all?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
@@ -26,8 +26,10 @@ const ManageOrders = () => {
   }
   return (
     <div className='bg-neutral p-5 my-5'>
-      <div className='uppercase text-3xl mb-5'>Manage Products</div>
-      <hr />
+      <div className='uppercase text-3xl mb-5 text-base-100'>
+        Manage Products
+      </div>
+      <hr className='mb-10' />
       <div className='overflow-x-auto w-full'>
         <table className='table w-full'>
           <thead>

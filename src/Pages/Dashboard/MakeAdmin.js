@@ -18,7 +18,7 @@ const MakeAdmin = () => {
     error,
     refetch,
   } = useQuery('users', () =>
-    fetch(`http://localhost:5000/user?email=${adminEmail}`, {
+    fetch(`https://rollabike.herokuapp.com/user?email=${adminEmail}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },

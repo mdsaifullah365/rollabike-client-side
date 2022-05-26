@@ -15,7 +15,7 @@ const Payment = () => {
   const { id } = useParams();
   const [user] = useAuthState(auth);
   const { data: order, isLoading } = useQuery(['order', id], () =>
-    fetch(`http://localhost:5000/order/${id}?email=${user.email}`, {
+    fetch(`https://rollabike.herokuapp.com/order/${id}?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },

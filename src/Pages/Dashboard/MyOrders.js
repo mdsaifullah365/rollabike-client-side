@@ -14,7 +14,7 @@ const MyOrders = () => {
     isLoading,
     refetch,
   } = useQuery(['orders', user.email], () =>
-    fetch(`http://localhost:5000/order?email=${user.email}`, {
+    fetch(`https://rollabike.herokuapp.com/order?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
@@ -27,8 +27,9 @@ const MyOrders = () => {
     return <Loading />;
   }
   return (
-    <>
-      <div className='text-center text-xl text-accent mt-10'>My Orders</div>
+    <div className='bg-neutral p-5 my-5'>
+      <div className='uppercase text-3xl mb-5 text-base-100'>My Orders</div>
+      <hr className='mb-10' />
       <div className='overflow-x-auto w-full'>
         <table className='table w-full'>
           <thead>
@@ -54,7 +55,7 @@ const MyOrders = () => {
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
 

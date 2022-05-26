@@ -35,17 +35,11 @@ const OrderRowAdmin = ({ order, refetch, setModal }) => {
         ) : (
           <p className='text-red-600 text-lg'>Not Paid</p>
         )}
-        {paid ? (
+        {paid && (
           <span className='text-gray-800 text-xs'>
             TXNID:
             <span className='text-blue-500'> {transactionId}</span>
           </span>
-        ) : (
-          <Link
-            to={`/dashboard/payment/${_id}`}
-            className='btn btn-xs btn-success'>
-            Pay Now
-          </Link>
         )}
       </td>
       <th>

@@ -19,7 +19,7 @@ const Purchase = () => {
   const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product/${id}?email=${user.email}`, {
+    fetch(`https://rollabike.herokuapp.com/product/${id}?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },

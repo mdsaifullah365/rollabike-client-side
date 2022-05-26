@@ -6,7 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 // import { ReactQueryDevtools } from "react-query/devtools";
 import axios from 'axios';
-import { baseURL } from './baseURL/baseURL';
+
+const baseURL = 'http://localhost:5000';
+// const baseURL = `https://rollabike.herokuapp.com/`;
 
 // axios defaults
 axios.defaults.baseURL = baseURL;

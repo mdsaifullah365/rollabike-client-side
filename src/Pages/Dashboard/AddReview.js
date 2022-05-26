@@ -60,41 +60,53 @@ const AddReview = () => {
       });
   };
   return (
-    <div className='min-h-[calc(100vh-64px)] flex justify-center items-center'>
-      <div className='flex flex-col w-full max-w-md shadow-lg p-8'>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className='form-control w-full'>
-            <label className='label'>
-              <span className='label-text text-base'>Rating (1 to 5)</span>
-            </label>
+    <div className='bg-neutral p-5 my-5 text-base-200'>
+      <div className='uppercase text-3xl mb-5'>Add A Review</div>
+      <hr />
+      <div className='flex justify-center items-center py-24'>
+        <div className='flex flex-col w-full max-w-md bg-accent shadow-lg p-8'>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='form-control w-full'>
+              <label className='label'>
+                <span className='label-text text-base-100 text-base'>
+                  Rating (1 to 5)
+                </span>
+              </label>
+              <input
+                type='text'
+                placeholder='Rating'
+                className='input input-bordered text-secondary w-full'
+                {...register('rating')}
+              />
+              <p className='mt-2 text-sm text-error'>
+                {errors.rating?.message}
+              </p>
+            </div>
+
+            <div className='form-control w-full'>
+              <label className='label'>
+                <span className='label-text text-base-100 text-base'>
+                  Short Review
+                </span>
+              </label>
+              <textarea
+                type='text'
+                placeholder='Write your review here'
+                className='textarea textarea-bordered text-secondary w-full'
+                {...register('review')}
+              />
+              <p className='mt-2 text-sm text-error'>
+                {errors.review?.message}
+              </p>
+            </div>
+
             <input
-              type='text'
-              placeholder='Rating'
-              className='input input-bordered w-full'
-              {...register('rating')}
+              type='submit'
+              value='Add Review'
+              className='btn btn-secondary w-full mt-5 mb-2'
             />
-            <p className='mt-2 text-sm text-error'>{errors.rating?.message}</p>
-          </div>
-
-          <div className='form-control w-full'>
-            <label className='label'>
-              <span className='label-text text-base'>Short Review</span>
-            </label>
-            <textarea
-              type='text'
-              placeholder='Write your review here'
-              className='textarea textarea-bordered w-full'
-              {...register('review')}
-            />
-            <p className='mt-2 text-sm text-error'>{errors.review?.message}</p>
-          </div>
-
-          <input
-            type='submit'
-            value='Add Review'
-            className='btn btn-secondary w-full mt-5 mb-2'
-          />
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

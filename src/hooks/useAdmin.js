@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import axiosPrivate from "../api/axiosPrivate";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const useAdmin = (user) => {
   const [admin, setAdmin] = useState(false);
   const [adminLoading, setAdminLoading] = useState(true);
   useEffect(() => {
-    axiosPrivate
+    axios
       .get(`/admin?email=${user?.email}`)
       .then((res) => {
         setAdmin(res.data.admin);

@@ -12,7 +12,7 @@ import RequireAuth from './Pages/Shared/RequireAuth';
 import Purchase from './Pages/Home/Purchase';
 import MyOrders from './Pages/Dashboard/MyOrders';
 import AddReview from './Pages/Dashboard/AddReview';
-import MyProfile from './Pages/Dashboard/MyProfile';
+import MyProfile from './Pages/Dashboard/MyProfile/MyProfile';
 import ManageOrders from './Pages/Dashboard/ManageOrders';
 import AddProduct from './Pages/Dashboard/AddProduct';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin';

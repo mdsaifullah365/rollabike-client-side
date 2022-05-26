@@ -1,11 +1,11 @@
-import React from "react";
-import axiosPrivate from "../../api/axiosPrivate";
+import React from 'react';
+import axios from 'axios';
 
 const CancelOrderModal = ({ order, refetch, setModal }) => {
   const { _id, email, productImage, productName, quantity } = order;
   // Cancel an Order
   const cancelOrder = (id) => {
-    axiosPrivate.delete(`/order/${id}?email=${email}`).then((res) => {
+    axios.delete(`/order/${id}?email=${email}`).then((res) => {
       if (res.data.deletedCount === 1) {
         setModal(null);
         refetch();
@@ -14,34 +14,32 @@ const CancelOrderModal = ({ order, refetch, setModal }) => {
   };
   return (
     <div>
-      <input type="checkbox" id="cancel-order-modal" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-xl text-red-500">
+      <input type='checkbox' id='cancel-order-modal' className='modal-toggle' />
+      <div className='modal modal-bottom sm:modal-middle'>
+        <div className='modal-box'>
+          <h3 className='font-bold text-xl text-red-500'>
             Are you sure you want to cancel this order?
           </h3>
-          <div className="flex items-center space-x-3 py-8">
-            <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
+          <div className='flex items-center space-x-3 py-8'>
+            <div className='avatar'>
+              <div className='mask mask-squircle w-12 h-12'>
                 <img src={productImage} alt={productName} />
               </div>
             </div>
             <div>
-              <div className="font-bold">{productName}</div>
-              <div className="text-sm opacity-75">Quantity: ${quantity}</div>
+              <div className='font-bold'>{productName}</div>
+              <div className='text-sm opacity-75'>Quantity: ${quantity}</div>
             </div>
           </div>
-          <div className="modal-action">
+          <div className='modal-action'>
             <label
               onClick={() => cancelOrder(_id)}
-              className="btn bg-red-500 text-white"
-            >
+              className='btn bg-red-500 text-white'>
               Confirm
             </label>
             <label
-              for="cancel-order-modal"
-              className="btn bg-green-500 text-white"
-            >
+              for='cancel-order-modal'
+              className='btn bg-green-500 text-white'>
               Cancel
             </label>
           </div>

@@ -43,8 +43,8 @@ const Banner = () => {
         modules={[Navigation, Pagination, EffectFade, Keyboard, Autoplay, Zoom]}
         className='mySwiper bg-accent mb-40'>
         <SwiperSlide>
-          <div className='container grid md:grid-cols-2 items-center gap-10 bg-accent text-base-200 py-24 md:py-40'>
-            <div className='px-5'>
+          <div className='container grid md:grid-cols-2 items-center gap-10 bg-accent text-base-200 py-24 md:py-32'>
+            <div className='px-8'>
               <h1 className='text-5xl mb-5 leading-snug'>
                 Essential Motorcycle{' '}
                 <span className='text-primary'>Parts At Best Price Ever</span>
@@ -61,8 +61,8 @@ const Banner = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className='container grid md:grid-cols-2 items-center gap-10 bg-accent text-base-200 py-24 md:py-40'>
-            <div className='px-5'>
+          <div className='container grid md:grid-cols-2 items-center gap-10 bg-accent text-base-200 py-24 md:py-32'>
+            <div className='px-8'>
               <h1 className='text-5xl mb-5 leading-snug'>
                 Connect Our Customer{' '}
                 <span className='text-primary'>Support Representative</span>

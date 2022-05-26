@@ -10,7 +10,9 @@ import { baseURL } from './baseURL/baseURL';
 
 // axios defaults
 axios.defaults.baseURL = baseURL;
-
+axios.defaults.headers.authorization = `Bearer ${localStorage.getItem(
+  'accessToken'
+)}`;
 // Create a client
 const queryClient = new QueryClient();
 

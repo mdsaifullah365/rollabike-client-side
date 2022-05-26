@@ -65,7 +65,7 @@ const Navbar = () => {
                   <img src={user.photoURL} alt={user?.displayName} />
                 ) : (
                   <p className='uppercase text-white text-2xl text-center mt-1'>
-                    {user?.displayName[0]}
+                    {user?.displayName && user.displayName[0]}
                   </p>
                 )}
               </div>
@@ -82,7 +82,7 @@ const Navbar = () => {
                     <img src={user.photoURL} alt={user?.displayName} />
                   ) : (
                     <p className='text-white text-7xl text-center mt-3'>
-                      {user?.displayName[0]}
+                      {user?.displayName && user.displayName[0]}
                     </p>
                   )}
                 </div>

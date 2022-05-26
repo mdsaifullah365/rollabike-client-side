@@ -3,7 +3,6 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 const UserRow = ({ user, i, refetch, adminEmail }) => {
-  console.log(user);
   const { email, role } = user;
   const makeAdmin = () => {
     axios.put(`/admin/add/${email}?email=${adminEmail}`).then((res) => {

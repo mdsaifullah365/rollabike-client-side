@@ -63,8 +63,8 @@ const AddReview = () => {
     <div className='bg-neutral p-5 my-5 text-base-200'>
       <div className='uppercase text-3xl mb-5'>Add A Review</div>
       <hr />
-      <div className='flex justify-center items-center py-24'>
-        <div className='flex flex-col w-full max-w-md bg-accent shadow-lg p-8'>
+      <div className='flex justify-center items-center py-10'>
+        <div className='flex flex-col w-full max-w-xl bg-accent shadow-lg p-8'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='form-control w-full'>
               <label className='label'>

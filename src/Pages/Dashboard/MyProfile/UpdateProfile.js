@@ -52,7 +52,7 @@ const UpdateProfile = ({ mongoUser, user, refetch, handleShowForm }) => {
       education: { degree: degreeValue, institute: instituteValue },
     };
     await axios
-      .put(`/user/update/${email}?email=${email}`, userInfo)
+      .put(`/api/v1/user/update/${email}?email=${email}`, userInfo)
       .then((data) => {
         refetch();
         handleShowForm();

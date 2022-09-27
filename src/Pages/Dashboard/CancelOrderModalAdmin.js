@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-const CancelOrderModalAdmin = ({ order, refetch, setModal }) => {
-  const { _id, email, productImage, productName, quantity } = order;
+const CancelOrderModalAdmin = ({ user, order, refetch, setModal }) => {
+  const { _id, productImage, productName, quantity } = order;
   // Cancel an Order
   const cancelOrder = (id) => {
-    axios.delete(`/order/${id}?email=${email}`).then((res) => {
+    axios.delete(`/api/v1/order/${id}?email=${user?.email}`).then((res) => {
       if (res.data.deletedCount === 1) {
         setModal(null);
         refetch();

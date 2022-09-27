@@ -17,7 +17,7 @@ const CheckoutForm = ({ order }) => {
   useEffect(() => {
     const amount = parseFloat(bill.toFixed(2)) * 100;
     axios
-      .post(`/create-payment-intent?email=${user.email}`, { amount })
+      .post(`/api/v1/create-payment-intent?email=${user.email}`, { amount })
       .then((res) => setClientSecret(res.data.clientSecret));
   }, [bill, user.email]);
 
@@ -58,7 +58,7 @@ const CheckoutForm = ({ order }) => {
     } else {
       setCardError('');
       axios
-        .put(`/order/${_id}?email=${user.email}`, {
+        .put(`/api/v1/order/${_id}?email=${user.email}`, {
           transactionId: paymentIntent.id,
         })
         .then((res) => {

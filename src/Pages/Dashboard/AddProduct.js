@@ -52,7 +52,7 @@ const AddProduct = () => {
       .then((result) => {
         if (result.status === 200) {
           const image = result.data.url;
-          console.log(image);
+         
           const product = {
             name,
             description,
@@ -62,11 +62,13 @@ const AddProduct = () => {
             image,
             admin: user.email,
           };
-          axios.post(`/product?email=${user.email}`, product).then((data) => {
-            console.log(data);
-            toast.success('Product Added Successfully');
-            reset();
-          });
+          axios
+            .post(`/api/v1/product?email=${user.email}`, product)
+            .then((data) => {
+              
+              toast.success('Product Added Successfully');
+              reset();
+            });
         }
       });
   };

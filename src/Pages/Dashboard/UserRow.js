@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 const UserRow = ({ user, i, refetch, adminEmail }) => {
   const { email, role } = user;
   const makeAdmin = () => {
-    axios.put(`/admin/add/${email}?email=${adminEmail}`).then((res) => {
+    axios.put(`/api/v1/admin/add/${email}?email=${adminEmail}`).then((res) => {
       if (res.status === 200) {
         toast.success(`${email} is made an Admin!`);
         refetch();
@@ -13,12 +13,14 @@ const UserRow = ({ user, i, refetch, adminEmail }) => {
     });
   };
   const removeAdmin = () => {
-    axios.put(`/admin/remove/${email}?email=${adminEmail}`).then((res) => {
-      if (res.status === 200) {
-        toast.success(`${email} is removed from Admin!`);
-        refetch();
-      }
-    });
+    axios
+      .put(`/api/v1/admin/remove/${email}?email=${adminEmail}`)
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success(`${email} is removed from Admin!`);
+          refetch();
+        }
+      });
   };
   return (
     <tr>

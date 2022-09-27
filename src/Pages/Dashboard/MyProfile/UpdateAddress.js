@@ -25,7 +25,7 @@ const UpdateAddress = ({ email, refetch }) => {
     const { address } = data;
     const userInfo = { address: address };
     await axios
-      .put(`/user/update/${email}?email=${email}`, userInfo)
+      .put(`/api/v1/user/update/${email}?email=${email}`, userInfo)
       .then((data) => {
         data.data.modifiedCount && refetch();
       });

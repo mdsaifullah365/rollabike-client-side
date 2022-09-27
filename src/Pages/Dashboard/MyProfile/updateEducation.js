@@ -29,7 +29,7 @@ const UpdateEducation = ({ email, refetch }) => {
     const { degree, institute } = data;
     const userInfo = { education: { degree: degree, institute: institute } };
     await axios
-      .put(`/user/update/${email}?email=${email}`, userInfo)
+      .put(`/api/v1/user/update/${email}?email=${email}`, userInfo)
       .then((data) => {
         data.data.modifiedCount && refetch();
       });

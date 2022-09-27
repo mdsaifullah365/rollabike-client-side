@@ -63,8 +63,8 @@ const Navbar = () => {
             <label
               onClick={toggleAvatarDropdown}
               tabIndex='2'
-              class='avatar my-1 ml-4 mr-6 cursor-pointer'>
-              <div class='w-10 rounded-full bg-accent hover:ring ring-primary ring-offset-base-100 ring-offset-2'>
+              className='avatar my-1 ml-4 mr-6 cursor-pointer'>
+              <div className='w-10 rounded-full bg-accent hover:ring ring-primary ring-offset-base-100 ring-offset-2'>
                 {user?.photoURL ? (
                   <img src={user.photoURL} alt={user?.displayName} />
                 ) : (
@@ -81,7 +81,7 @@ const Navbar = () => {
                 avatarDropdown && 'hidden'
               } menu menu-compact dropdown-content mt-3  p-2 shadow bg-secondary text-white rounded-box w-52 right-0`}>
               <div className='avatar mx-auto mt-2 mb-3'>
-                <div class='w-28 rounded-full bg-accent'>
+                <div className='w-28 rounded-full bg-accent'>
                   {user?.photoURL ? (
                     <img src={user.photoURL} alt={user?.displayName} />
                   ) : (

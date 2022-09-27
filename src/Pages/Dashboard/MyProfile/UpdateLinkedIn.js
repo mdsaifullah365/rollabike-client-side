@@ -25,7 +25,7 @@ const UpdateLinkedIn = ({ email, refetch }) => {
     const { linkedin } = data;
     const userInfo = { linkedin };
     await axios
-      .put(`/user/update/${email}?email=${email}`, userInfo)
+      .put(`/api/v1/user/update/${email}?email=${email}`, userInfo)
       .then((data) => {
         data.data.modifiedCount && refetch();
       });

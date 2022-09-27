@@ -19,11 +19,14 @@ const Purchase = () => {
   const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
-    fetch(`https://rollabike.herokuapp.com/product/${id}?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    })
+    fetch(
+      `https://rollabike.herokuapp.com/api/v1/product/${id}?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => setProduct(data));
   }, [id, user.email]);
@@ -84,7 +87,7 @@ const Purchase = () => {
       quantity: quantity,
       bill: grandTotal,
     };
-    await axios.post(`/order`, order).then((result) => {
+    await axios.post(`/api/v1/order`, order).then((result) => {
       if (result.data.insertedId) {
         toast.success('Order Placed Successfully');
         reset();
@@ -160,11 +163,11 @@ const Purchase = () => {
                   {errors.address?.message}
                 </p>
               </div>
-              <div class='form-control'>
-                <label class='label'>
-                  <span class='label-text text-base-100'>Quantity</span>
+              <div className='form-control'>
+                <label className='label'>
+                  <span className='label-text text-base-100'>Quantity</span>
                 </label>
-                <label class='input-group'>
+                <label className='input-group'>
                   <span
                     className='px-4 bg-primary text-secondary  text-2xl  cursor-pointer'
                     onClick={decreaseQuantity}>
@@ -174,7 +177,7 @@ const Purchase = () => {
                     type='text'
                     placeholder='Enter Quantity'
                     value={quantity}
-                    class='input input-bordered text-secondary w-full'
+                    className='input input-bordered text-secondary w-full'
                     onChange={handleQuantityChange}
                   />
                   <span

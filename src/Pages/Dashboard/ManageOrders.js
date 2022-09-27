@@ -13,11 +13,14 @@ const ManageOrders = () => {
     isLoading,
     refetch,
   } = useQuery(['ordersAdmin', user.email], () =>
-    fetch(`https://rollabike.herokuapp.com/order/all?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://rollabike.herokuapp.com/api/v1/order/all?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    ).then((res) => res.json())
   );
   const [modal, setModal] = useState(null);
 
@@ -53,6 +56,7 @@ const ManageOrders = () => {
         {/* Cancel Order Modal */}
         {modal && (
           <CancelOrderModalAdmin
+            user={user}
             order={modal}
             refetch={refetch}
             setModal={setModal}

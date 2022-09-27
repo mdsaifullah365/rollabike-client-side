@@ -48,7 +48,7 @@ const MyPortfolio = () => {
             </h2>
             <div className='flex justify-center items-center gap-5'>
               <div className='w-20 h-px bg-secondary'></div>
-              <div class='w-2 h-2 rounded-full text-4xl text-base-100 bg-secondary hover:bg-primary cursor-pointer flex justify-center items-center'></div>
+              <div className='w-2 h-2 rounded-full text-4xl text-base-100 bg-secondary hover:bg-primary cursor-pointer flex justify-center items-center'></div>
               <div className='w-20 h-px bg-secondary'></div>
             </div>
           </div>

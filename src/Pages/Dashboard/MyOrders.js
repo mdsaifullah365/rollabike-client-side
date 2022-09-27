@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
@@ -14,14 +13,13 @@ const MyOrders = () => {
     isLoading,
     refetch,
   } = useQuery(['orders', user.email], () =>
-    fetch(`https://rollabike.herokuapp.com/order?email=${user.email}`, {
+    fetch(`https://rollabike.herokuapp.com/api/v1/order?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
     }).then((res) => res.json())
   );
   const [modal, setModal] = useState(null);
-  console.log(modal);
 
   if (isLoading) {
     return <Loading />;

@@ -73,7 +73,7 @@ const Support = () => {
               </h2>
               <div className='flex justify-center items-center gap-5'>
                 <div className='w-20 h-px bg-secondary'></div>
-                <div class='w-16 h-16 rounded-full text-4xl text-base-100 bg-secondary hover:bg-primary cursor-pointer flex justify-center items-center'>
+                <div className='w-16 h-16 rounded-full text-4xl text-base-100 bg-secondary hover:bg-primary cursor-pointer flex justify-center items-center'>
                   <CgPhone />
                 </div>
                 <div className='w-20 h-px bg-secondary'></div>

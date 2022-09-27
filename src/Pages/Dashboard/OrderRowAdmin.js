@@ -1,17 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { MdDone } from 'react-icons/md';
 
 const OrderRowAdmin = ({ order, refetch, setModal }) => {
-  const {
-    _id,
-    productName,
-    productImage,
-    quantity,
-    bill,
-    paid,
-    transactionId,
-  } = order;
+  const { productName, productImage, quantity, bill, paid, transactionId } =
+    order;
 
   return (
     <tr>

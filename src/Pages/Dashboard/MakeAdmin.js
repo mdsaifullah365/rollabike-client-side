@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -18,7 +17,7 @@ const MakeAdmin = () => {
     error,
     refetch,
   } = useQuery('users', () =>
-    fetch(`https://rollabike.herokuapp.com/user?email=${adminEmail}`, {
+    fetch(`https://rollabike.herokuapp.com/api/v1/user?email=${adminEmail}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },

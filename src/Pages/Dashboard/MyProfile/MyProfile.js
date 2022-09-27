@@ -23,11 +23,14 @@ const MyProfile = () => {
     isLoading,
     refetch,
   } = useQuery('mongoUser', () =>
-    fetch(`https://rollabike.herokuapp.com/user/${email}?email=${email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://rollabike.herokuapp.com/api/v1/user/${email}?email=${email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    ).then((res) => res.json())
   );
 
   if (isLoading) {
@@ -46,7 +49,7 @@ const MyProfile = () => {
           {/* Avatar */}
           <div className='flex justify-center items-center'>
             <div className='avatar mx-auto my-5'>
-              <div class='w-48 rounded-full bg-accent'>
+              <div className='w-48 rounded-full bg-accent'>
                 {photoURL ? (
                   <img src={photoURL} alt={displayName} />
                 ) : (

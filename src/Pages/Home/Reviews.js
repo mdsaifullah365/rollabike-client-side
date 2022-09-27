@@ -5,7 +5,7 @@ import ReviewCard from './ReviewCard';
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    axios.get('/review').then((res) => setReviews(res.data));
+    axios.get('/api/v1/review').then((res) => setReviews(res.data));
   }, []);
   return (
     <section className='container my-28'>

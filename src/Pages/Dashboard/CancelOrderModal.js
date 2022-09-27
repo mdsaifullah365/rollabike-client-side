@@ -5,7 +5,7 @@ const CancelOrderModal = ({ order, refetch, setModal }) => {
   const { _id, email, productImage, productName, quantity } = order;
   // Cancel an Order
   const cancelOrder = (id) => {
-    axios.delete(`/order/${id}?email=${email}`).then((res) => {
+    axios.delete(`/api/v1/order/${id}?email=${email}`).then((res) => {
       if (res.data.deletedCount === 1) {
         setModal(null);
         refetch();

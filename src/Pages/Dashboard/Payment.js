@@ -15,11 +15,14 @@ const Payment = () => {
   const { id } = useParams();
   const [user] = useAuthState(auth);
   const { data: order, isLoading } = useQuery(['order', id], () =>
-    fetch(`https://rollabike.herokuapp.com/order/${id}?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    }).then((res) => res.json())
+    fetch(
+      `https://rollabike.herokuapp.com/api/v1/order/${id}?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    ).then((res) => res.json())
   );
   if (isLoading) {
     return <Loading />;

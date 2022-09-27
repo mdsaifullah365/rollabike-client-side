@@ -6,7 +6,7 @@ import ProductCard from './ProductCard';
 
 const Products = () => {
   const { data: products, isLoading } = useQuery('products', () =>
-    axios.get('/product')
+    axios.get('/api/v1/product')
   );
   if (isLoading) {
     return <Loading />;

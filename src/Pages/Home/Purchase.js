@@ -20,7 +20,7 @@ const Purchase = () => {
 
   useEffect(() => {
     fetch(
-      `https://rollabike.herokuapp.com/api/v1/product/${id}?email=${user.email}`,
+      `https://roll-a-bike.herokuapp.com/api/v1/product/${id}?email=${user.email}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,

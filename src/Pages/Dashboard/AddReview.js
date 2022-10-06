@@ -43,14 +43,17 @@ const AddReview = () => {
       review,
     };
 
-    fetch(`https://rollabike.herokuapp.com/api/v1/review?email=${user.email}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-      body: JSON.stringify(userReview),
-    })
+    fetch(
+      `https://roll-a-bike.herokuapp.com/api/v1/review?email=${user.email}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+        body: JSON.stringify(userReview),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data?.insertedId) {

@@ -24,7 +24,7 @@ const MyProfile = () => {
     refetch,
   } = useQuery('mongoUser', () =>
     fetch(
-      `https://rollabike.herokuapp.com/api/v1/user/${email}?email=${email}`,
+      `https://roll-a-bike.herokuapp.com/api/v1/user/${email}?email=${email}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,

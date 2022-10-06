@@ -14,7 +14,7 @@ const ManageOrders = () => {
     refetch,
   } = useQuery(['ordersAdmin', user.email], () =>
     fetch(
-      `https://rollabike.herokuapp.com/api/v1/order/all?email=${user.email}`,
+      `https://roll-a-bike.herokuapp.com/api/v1/order/all?email=${user.email}`,
       {
         headers: {
           authorization: `Bearer ${localStorage.getItem('accessToken')}`,

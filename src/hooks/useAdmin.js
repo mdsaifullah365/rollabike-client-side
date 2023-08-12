@@ -4,14 +4,11 @@ const useAdmin = (user) => {
   const [admin, setAdmin] = useState(false);
   const [adminLoading, setAdminLoading] = useState(true);
   useEffect(() => {
-    fetch(
-      `https://roll-a-bike.herokuapp.com/api/v1/admin?email=${user?.email}`,
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      }
-    )
+    fetch(`https://rollabike.onrender.com/api/v1/admin?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data?.admin) {

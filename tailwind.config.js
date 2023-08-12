@@ -1,4 +1,6 @@
-module.exports = {
+import daisyui from 'daisyui';
+
+export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     container: {
@@ -12,7 +14,7 @@ module.exports = {
   },
 
   // DaisyUI
-  plugins: [require('daisyui')],
+  plugins: [daisyui],
   daisyui: {
     themes: [
       {
